@@ -6,8 +6,7 @@ from flask import Flask
 from flask import Response
 
 app = Flask(__name__)
-# SEED = 2958073676721306211
-SEED = ##seed##
+SEED = 2958073676721306211
 CANONICAL = 'http://appgen.me/a/'
 
 querystring = '?seed=' + unicode(SEED)
@@ -30,7 +29,7 @@ def proxy(path):
     except Exception, e:
         print url
         print e.msg
-        return Response(status = 404)
+        return Response(response = '', status = 404)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
