@@ -7,7 +7,7 @@ from flask import Response
 
 app = Flask(__name__)
 SEED = ##seed##
-CANONICAL = 'http://appgen.me/a'
+CANONICAL = 'http://appgen.me/a/'
 
 querystring = '?seed=' + unicode(SEED)
 
