@@ -7,7 +7,7 @@ from flask import Response
 
 app = Flask(__name__)
 SEED = 2958073676721306211
-CANONICAL = 'http://appgen.me/a/'
+APPGEN = 'http://appgen.me/'
 
 querystring = '?seed=' + unicode(SEED)
 
@@ -18,7 +18,13 @@ def favicon():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def proxy(path):
-    url = CANONICAL + path + querystring
+    if path[:2] == 'js' or path[:3] == 'css':
+        upstream_path = APPGEN + path
+    else:
+        upstream_path = APPGEN + 'a/' + path
+
+    print upstream_path
+    url = upstream_path + querystring
     try:
         f = urllib2.urlopen(url)
         response = f.read().replace(querystring, '') # remove seed
