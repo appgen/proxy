@@ -7,7 +7,7 @@ from flask import Response
 
 app = Flask(__name__)
 SEED = ##seed##
-CANONICAL = 'http://appgen.me/a/'
+CANONICAL = 'http://appgen.me/a'
 
 querystring = '?seed=' + unicode(SEED)
 
@@ -16,7 +16,7 @@ querystring = '?seed=' + unicode(SEED)
 def proxy(path):
     url = CANONICAL + path + querystring
     f = urllib2.urlopen(url)
-    response = f.read().replace(querystring, '') # remove seed
+    response = f.read().replace(querystring, '').replace('"/a', '"') # remove seed and /a
     status = f.getcode()
     headers = f.headers.dict
     content_type = headers.get('content-type', 'text/html')
